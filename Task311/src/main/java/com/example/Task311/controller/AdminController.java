@@ -1,5 +1,6 @@
 package com.example.Task311.controller;
 
+import com.example.Task311.mappers.UserMappers;
 import com.example.Task311.model.User;
 import com.example.Task311.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     private final UserService userService;
+
     @Autowired
     public AdminController(UserService userService) {
         this.userService = userService;
@@ -42,7 +44,7 @@ public class AdminController {
     @PostMapping("/users")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String createUser (@ModelAttribute("user") User user) {
-        userService.addUser(user);
+        userService.addUser(UserMappers.USER_MAPPERS.fromDtouser(user));
         return "redirect:/admin/users";
     }
 
@@ -56,7 +58,7 @@ public class AdminController {
     @PutMapping ("/users/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String updateUser (@ModelAttribute("user") User user) {
-        userService.updateUser(user);
+        userService.updateUser(UserMappers.USER_MAPPERS.fromDtouser(user));
         return "redirect:/admin/users";
     }
 

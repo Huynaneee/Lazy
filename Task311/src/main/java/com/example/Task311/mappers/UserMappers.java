@@ -9,6 +9,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(uses = {RoleMappers.class})
 public interface UserMappers {
     UserMappers USER_MAPPERS = Mappers.getMapper(UserMappers.class);
-    UserDTO fromUsers(User user);
+    User fromUsers(UserDTO user);
+    UserDTO fromDtouser(User user);
 
 }

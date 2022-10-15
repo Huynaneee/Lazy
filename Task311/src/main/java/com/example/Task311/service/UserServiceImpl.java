@@ -25,13 +25,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addUser(User user) {
-        userDao.addUser(user);
+    public void addUser(UserDTO user) {
+        userDao.addUser(UserMappers.USER_MAPPERS.fromUsers(user));
     }
 
     @Override
-    public void updateUser(User user) {
-        userDao.updateUser(user);
+    public void updateUser(UserDTO user) {
+        userDao.updateUser(UserMappers.USER_MAPPERS.fromUsers(user));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         List<UserDTO> dtoList = new ArrayList<>();
         List<User> userList = userDao.getListUsers();
         for (User user : userList) {
-            dtoList.add(UserMappers.USER_MAPPERS.fromUsers(user));
+            dtoList.add(UserMappers.USER_MAPPERS.fromDtouser(user));
         }
         return dtoList;
     }
