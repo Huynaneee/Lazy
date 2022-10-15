@@ -1,6 +1,7 @@
 package com.example.Task311.dao;
 
 
+import com.example.Task311.DTO.UserDTO;
 import com.example.Task311.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

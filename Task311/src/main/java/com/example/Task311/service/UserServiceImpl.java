@@ -1,6 +1,8 @@
 package com.example.Task311.service;
 
+import com.example.Task311.DTO.UserDTO;
 import com.example.Task311.dao.UserDao;
+import com.example.Task311.mappers.UserMappers;
 import com.example.Task311.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,8 +45,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> getListUsers() {
-        return userDao.getListUsers();
+    public List<UserDTO> getListUsers() {
+        List<UserDTO> dtoList = new ArrayList<>();
+        List<User> userList = userDao.getListUsers();
+        for (User user : userList) {
+            dtoList.add(UserMappers.USER_MAPPERS.fromUsers(user));
+        }
+        return dtoList;
     }
 
     @Override
