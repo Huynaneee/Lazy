@@ -1,5 +1,7 @@
 package com.example.Task311.model;
 
+import com.example.Task311.mappers.RoleMappers;
+import com.example.Task311.mappers.UserMappers;
 import com.example.Task311.service.RoleService;
 import com.example.Task311.service.UserService;
 import jakarta.annotation.PostConstruct;
@@ -39,12 +41,12 @@ public class UserInitTest {
         User testUser = new User("Luna","Moon","moon21@sda", "100",roles);
 
 
-        roleService.addRole(role1);
-        roleService.addRole(role2);
+        roleService.addRole(RoleMappers.ROLE_MAPPERS.fromUserRole(role1));
+        roleService.addRole(RoleMappers.ROLE_MAPPERS.fromUserRole(role2));
 
-        userService.addUser(admin);
-        userService.addUser(user);
-        userService.addUser(testUser);
+        userService.addUser(UserMappers.USER_MAPPERS.fromDtouser(admin));
+        userService.addUser(UserMappers.USER_MAPPERS.fromDtouser(user));
+        userService.addUser(UserMappers.USER_MAPPERS.fromDtouser(testUser));
 
 
 
